@@ -70,6 +70,8 @@ if ($usermode) {
 
 }
 
+
+
 # Build path to executeable
 $Choco = "$ChocolateyInstall\bin\choco.exe"
 
@@ -79,19 +81,18 @@ if(!(Test-Path $Choco)) {
          Invoke-Expression ((New-Object net.webclient).DownloadString('https://chocolatey.org/install.ps1')) -ErrorAction stop
      }
      catch {
-         Throw “Failed to install Chocolatey”
+         Throw "Failed to install Chocolatey"
      }       
 } else {
     # Try and upgrade chocolatey if it was already installed
     Write-Output "Trying to upgrade Chocolatey..."
     try {
-        Invoke-Expression “cmd.exe /c $Choco upgrade chocolatey -y” -ErrorAction stop
+        Invoke-Expression "cmd.exe /c $Choco upgrade chocolatey -y" -ErrorAction stop
     }
     catch {
-        Write-Output “Failed to auto upgrade chocolatey”
+        Write-Output "Failed to auto upgrade chocolatey"
     }
 }
-
 
 ######
 #
@@ -104,30 +105,30 @@ if($uninstall) {
 
     # Uninstall requested package
     try {
-        Invoke-Expression “cmd.exe /c $Choco uninstall $package -y” -ErrorAction Stop
+        Invoke-Expression "cmd.exe /c $Choco uninstall $package -y" -ErrorAction Stop
     }
     catch {
-        Throw “Failed to uninstall $package”
+        Throw "Failed to uninstall $package"
     }
 
 } elseif($upgrade) {
 
     # Upgrade requested package to latest approved version
     try {
-        Invoke-Expression “cmd.exe /c $Choco upgrade $package -y” -ErrorAction Stop
+        Invoke-Expression "cmd.exe /c $Choco upgrade $package -y" -ErrorAction Stop
     }
     catch {
-        Throw “Failed to upgrade $package”
+        Throw "Failed to upgrade $package"
     }
 
 } else {
 
     # Install requested package
     try {
-        Invoke-Expression “cmd.exe /c $Choco Install $package -y” -ErrorAction Stop
+        Invoke-Expression "cmd.exe /c $Choco Install $package -y" -ErrorAction Stop
     }
     catch {
-        Throw “Failed to install $package”
+        Throw "Failed to install $package"
     }
 
 }
